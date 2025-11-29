@@ -3,7 +3,7 @@ import discord, os, asyncio, logging
 from logging.handlers import RotatingFileHandler
 from discord.ext import commands
 from discord import app_commands
-from dotenv import load_dotenv
+from config import config  # <-- laddar din config
 
 # Se till att log-mappen finns
 os.makedirs("logs", exist_ok=True)
@@ -31,13 +31,14 @@ error_logger.setLevel(logging.WARNING)
 TOKEN = os.getenv("TOKEN")
 
 if not TOKEN:
-    logger.error("❌ TOKEN saknas i .env-fil!")
+    logger.error("❌ TOKEN saknas i miljön!")
     exit(1)
 
 intents = discord.Intents.default()
 intents.message_content = True
 intents.members = True
-bot = commands.Bot(command_prefix="!", intents=intents, case_insensitive=True)
+
+bot = commands.Bot(intents=intents)
 
 @bot.event
 async def setup_hook():
@@ -77,8 +78,13 @@ async def setup_hook():
 @bot.event
 async def on_ready():
     """Körs när botten är redo"""
-    logger.info(f"✅ Botten är online som {bot.user}")
+    await bot.change_presence(activity=discord.Activity(
+        type=discord.ActivityType.watching,
+        name=config.status
+    ))
+    logger.info(f"✅ {config.name} är online – version {config.version}")
     logger.info(f"📊 Aktiv på {len(bot.guilds)} server(ar)")
+    logger.info(f"🎭 Status satt till: {config.status}")
 
 @bot.event
 async def on_app_command_completion(interaction: discord.Interaction, command: app_commands.Command):
@@ -109,6 +115,7 @@ async def on_slash_error(interaction: discord.Interaction, error: app_commands.A
 if __name__ == "__main__":
     try:
         logger.info("🚀 Startar Puffin Discord Bot...")
+        logger.info(f"🤖 Namn: {config.name} | Version: {config.version}")
         asyncio.run(bot.start(TOKEN))
     except KeyboardInterrupt:
         logger.info("🛑 Botten stoppades manuellt.")
