@@ -7,6 +7,7 @@ from dotenv import load_dotenv
 
 # Se till att log-mappen finns
 os.makedirs("logs", exist_ok=True)
+os.makedirs("data", exist_ok=True)
 
 # Grundläggande loggning till konsolen
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -28,7 +29,11 @@ error_logger.setLevel(logging.WARNING)
 
 # Token och intents
 load_dotenv()
-TOKEN = os.getenv("TOKEN")
+TOKEN = os.getenv("DISCORD_TOKEN")
+
+if not TOKEN:
+    logger.error("❌ DISCORD_TOKEN saknas i .env-fil!")
+    exit(1)
 
 intents = discord.Intents.default()
 intents.message_content = True
@@ -37,24 +42,29 @@ bot = commands.Bot(command_prefix="!", intents=intents, case_insensitive=True)
 
 @bot.event
 async def setup_hook():
-    for ext in [
+    """Laddas när botten startar"""
+    cogs_to_load = [
         "cogs.utils_core",
         "cogs.fun",
         "cogs.roles",
         "cogs.quotes",
-        "cogs.admin"
-    ]:
+        "cogs.admin",
+        "cogs.help"
+    ]
+
+    for ext in cogs_to_load:
         try:
             await bot.load_extension(ext)
             logger.info(f"✓ Laddade {ext}")
         except Exception as e:
             logger.error(f"⚠️ Kunde inte ladda {ext}: {e}")
 
+    # Synka slash-commands
     for guild in bot.guilds:
         try:
             bot.tree.clear_commands(guild=guild)
             synced = await bot.tree.sync(guild=guild)
-            logger.info(f"🧹 Rensade och synkade {len(synced)} kommandon för {guild.name} ({guild.id})")
+            logger.info(f"🧹 Synkade {len(synced)} kommandon för {guild.name} ({guild.id})")
         except Exception as e:
             logger.error(f"⚠️ Kunde inte synka kommandon för {guild.name}: {e}")
 
@@ -67,20 +77,25 @@ async def setup_hook():
 
 @bot.event
 async def on_ready():
+    """Körs när botten är redo"""
     logger.info(f"✅ Botten är online som {bot.user}")
+    logger.info(f"📊 Aktiv på {len(bot.guilds)} server(ar)")
 
 @bot.event
 async def on_app_command_completion(interaction: discord.Interaction, command: app_commands.Command):
+    """Loggar när ett slash-kommando körs"""
     user = interaction.user
     guild = interaction.guild.name if interaction.guild else "DM"
     command_logger.info(f"{user} körde /{command.name} i {guild} ({interaction.guild_id})")
 
 @bot.tree.error
 async def on_slash_error(interaction: discord.Interaction, error: app_commands.AppCommandError):
+    """Hanterar fel i slash-kommandon"""
     user = interaction.user
     guild = interaction.guild.name if interaction.guild else "DM"
     command = interaction.command.name if interaction.command else "okänt"
     error_logger.warning(f"❌ Fel i /{command} av {user} i {guild}: {type(error).__name__} – {error}")
+
     try:
         await interaction.response.send_message(
             "⚠️ Ett fel uppstod med kommandot. Det har loggats för felsökning.",
@@ -94,6 +109,7 @@ async def on_slash_error(interaction: discord.Interaction, error: app_commands.A
 
 if __name__ == "__main__":
     try:
+        logger.info("🚀 Startar Puffin Discord Bot...")
         asyncio.run(bot.start(TOKEN))
     except KeyboardInterrupt:
         logger.info("🛑 Botten stoppades manuellt.")
@@ -103,3 +119,4 @@ if __name__ == "__main__":
             logger.error(f"Fel vid stängning: {e}")
     except Exception as e:
         logger.error(f"🛑 Botten kraschade: {e}")
+        raise

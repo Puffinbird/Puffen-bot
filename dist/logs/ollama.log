@@ -1,9 +1,0 @@
-time=2025-11-28T15:35:15.539+01:00 level=INFO source=app_windows.go:273 msg="starting Ollama" app=C:\Users\User\AppData\Local\Programs\Ollama version=0.13.0 OS=Windows/10.0.22631
-time=2025-11-28T15:35:15.540+01:00 level=INFO source=app.go:237 msg="initialized tools registry" tool_count=0
-time=2025-11-28T15:35:15.547+01:00 level=INFO source=app.go:252 msg="starting ollama server"
-time=2025-11-28T15:35:15.547+01:00 level=INFO source=ui.go:138 msg="configuring ollama proxy" target=http://127.0.0.1:11434
-time=2025-11-28T15:35:15.833+01:00 level=INFO source=app.go:281 msg="starting ui server" port=60577
-Error: read /dev/stdin: The handle is invalid.
-time=2025-11-28T15:35:18.833+01:00 level=INFO source=updater.go:254 msg="beginning update checker" interval=1h0m0s
-time=2025-11-28T15:50:49.706+01:00 level=INFO source=app.go:325 msg="shutting down desktop server"
-time=2025-11-28T15:50:49.708+01:00 level=INFO source=app.go:330 msg="shutting down ollama server"
