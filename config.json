@@ -21,11 +21,6 @@
     "import_limit": 5000,
     "max_quote_length": 2000
   },
-  "ai": {
-    "enabled": true,
-    "max_tokens": 500,
-    "temperature": 0.7
-  },
   "logging": {
     "level": "INFO",
     "console": true,

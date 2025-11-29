@@ -10,26 +10,14 @@ En modulär och kraftfull Discord-bot byggd med `discord.py` och cogs-systemet. 
 - **Spel**: `!ping`, `!cf` (slantsingling), `!rps` (sten-sax-påse), `!roll` (tärning), `!8ball` (magisk boll)
 - **Citat**: Lägg till, visa och hantera servercitat med författare och datum
 
-### 📊 Statistik & Aktivitet
-- **Aktivitetsräkning**: Spårar meddelanden per användare och server
-- **Topplista**: Visar mest aktiva medlemmar
-- **Backfill**: Läs in historiska meddelanden för analys
-- **Exportera**: Hämta statistik i JSON-format
-
 ### 👤 Rollhantering
 - **Reaktionsroller**: Användare kan få roller genom att reagera på meddelanden
 - **Rollmeny**: Interaktiv rollmeny för enkel rollhantering
 - **Anpassningsbar**: Lätt att lägga till nya roller
 
-### 🤖 AI-integration
-- **Slash-commands**: `/askai` för AI-frågor i kanaler
-- **Direct Messages**: Chatta med AI:n direkt i DM
-- **Loggning**: Alla AI-samtal sparas separat för granskning
-- **Context-medveten**: Boten förstår sammanhanget i konversationer
-
 ### 🔧 Admin & Verktyg
-- **Synkronisering**: `/sync` för att synkronisera slash-commands
-- **Loggning**: Detaljerad loggning av kommandon, fel och händelser
+- **Synkronisering**: `/reload` för att ladda om cogs
+- **Loggning**: Detaljerad loggning av kommandon och fel
 - **Tillfälliga svar**: Automatisk borttagning av botens svar efter viss tid
 - **Fel-hantering**: Robust fel-hantering med logging
 
@@ -75,12 +63,6 @@ Skapa en fil med namn `.env` i projektets rot och lägg till:
 ```env
 # Discord Bot Token (från Developer Portal)
 DISCORD_TOKEN=your_token_here
-
-# OpenAI API Key (för AI-funktioner)
-OPENAI_API_KEY=your_openai_key_here
-
-# Valfritt: Discord Server ID för testing
-GUILD_ID=your_guild_id_here
 ```
 
 **Viktigt**: Lägg till `.env` i `.gitignore` så att du inte commitar känslig information!
@@ -154,15 +136,11 @@ Detta skriptet:
 | `!8ball` | Magisk boll |
 | `!quote [add/show/remove]` | Hantera citat |
 | `!help` | Visa alla kommandon |
-| `/askai <fråga>` | Fråga AI:n |
 
 ### 🔧 Admin-kommandon
 | Kommando | Beskrivning |
 |----------|-------------|
-| `/sync` | Synkronisera slash-commands |
-| `!stats` | Visa aktivitetsstatistik |
-| `!backfill` | Läs in historiska meddelanden |
-| `!export_stats` | Exportera statistik till JSON |
+| `/reload <cog>` | Ladda om en cog |
 
 ---
 
@@ -239,8 +217,7 @@ Botten loggar aktivitet i tre nivåer:
 Loggar sparas i:
 - `logs/commands.log` - Alla användarkommandon
 - `logs/errors.log` - Fel och avvikelser
-- `logs/dm_ai.log` - DM-konversationer med AI
-- `logs/guild_ai.log` - Guild-konversationer med AI
+- `logs/temp_messages.log` - Tillfälliga meddelanden
 
 ---
 
@@ -332,12 +309,6 @@ Har du frågor eller problem?
 
 ## 📈 Status & Todo
 
-- [x] Grundläggande bot-struktur
-- [x] Spel och underhållning
-- [x] Aktivitetsräkning och statistik
-- [x] AI-integration
-- [x] Rollhantering
-- [x] Loggning
 - [ ] Databaskoppling för större servrar
 - [ ] Webpanel för admin
 - [ ] Musik-spelare
