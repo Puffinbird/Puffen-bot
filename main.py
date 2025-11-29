@@ -28,7 +28,6 @@ error_logger.addHandler(error_handler)
 error_logger.setLevel(logging.WARNING)
 
 # Token och intents
-load_dotenv()
 TOKEN = os.getenv("DISCORD_TOKEN")
 
 if not TOKEN:
