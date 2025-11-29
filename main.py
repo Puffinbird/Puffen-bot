@@ -51,6 +51,7 @@ async def setup_hook():
         "cogs.quotes",
         "cogs.admin",
         "cogs.help",
+        "cogs.adventure"
     ]
 
     for ext in cogs_to_load:
