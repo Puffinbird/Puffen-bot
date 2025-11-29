@@ -28,10 +28,10 @@ error_logger.addHandler(error_handler)
 error_logger.setLevel(logging.WARNING)
 
 # Token och intents
-TOKEN = os.getenv("DISCORD_TOKEN")
+TOKEN = os.getenv("TOKEN")
 
 if not TOKEN:
-    logger.error("❌ DISCORD_TOKEN saknas i .env-fil!")
+    logger.error("❌ TOKEN saknas i .env-fil!")
     exit(1)
 
 intents = discord.Intents.default()
