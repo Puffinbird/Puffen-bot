@@ -1,0 +1,17 @@
+
+{
+  "xp": {
+    "per_message": 5,
+    "per_pending": 2,
+    "base_xp": 100
+},
+  "timeouts": {
+    "default": 60,
+    "quotes": 600
+},
+  "limits": {
+    "dice_amount": 50,
+    "dice_sides": 1000,
+    "import_limit": 5000
+  }
+}
