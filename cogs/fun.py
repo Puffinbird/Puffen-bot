@@ -28,24 +28,6 @@ class Fun(commands.Cog):
         await interaction.response.send_message(embed=embed)
 
     @app_commands.command(
-    name="rps",
-    description="Sten Sax Påse",
-    extras={"cog": "Spel", "help_text": "Spela mot botten. Välj mellan sten, sax eller påse."})
-    async def rps(self, interaction: discord.Interaction, val: str):
-        val = val.lower()
-        if val not in ["sten", "sax", "påse"]:
-            await interaction.response.send_message("❌ Välj **sten**, **sax** eller **påse**", ephemeral=True)
-            return
-
-        bot_val = random.choice(["sten", "sax", "påse"])
-        emojis = {"sten": "🪨", "sax": "✂️", "påse": "🗞️"}
-        win = (val == "sten" and bot_val == "sax") or (val == "sax" and bot_val == "påse") or (val == "påse" and bot_val == "sten")
-        res = "Du vann!" if win else "Jag vann!" if val != bot_val else "Oavgjort!"
-
-        embed = discord.Embed(title="✂️ Sten Sax Påse", description=f"{interaction.user.mention} {emojis[val]} vs {emojis[bot_val]} → **{res}**", color=0x33cc33)
-        await interaction.response.send_message(embed=embed, delete_after=60)
-
-    @app_commands.command(
     name="dice",
     description="Kasta tärning (ex: 2d20)",
     extras={"cog": "Spel", "help_text": "Exempel: `/dice 2d6` kastar två sexsidiga tärningar. Max 50 tärningar, 1000 sidor."})
