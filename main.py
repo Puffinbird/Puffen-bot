@@ -3,6 +3,7 @@ import discord, os, asyncio, logging
 from logging.handlers import RotatingFileHandler
 from discord.ext import commands
 from discord import app_commands
+from dotenv import load_dotenv
 from config import config  # <-- laddar din config
 
 # Se till att log-mappen finns
