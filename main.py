@@ -42,8 +42,7 @@ async def setup_hook():
         "cogs.fun",
         "cogs.roles",
         "cogs.quotes",
-        "cogs.admin",
-        "cogs.ai"
+        "cogs.admin"
     ]:
         try:
             await bot.load_extension(ext)

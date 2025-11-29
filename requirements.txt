@@ -1,6 +1,6 @@
 # Discord-bot core
-discord.py==2.3.2
-python-dotenv==1.0.0
+discord.py==2.6.4
+python-dotenv==1.2.1
 
 # Logging & färgade terminalutskrifter
 colorama==0.4.6
@@ -8,7 +8,7 @@ loguru==0.7.2
 
 # HTTP & API-anrop (för AI eller externa tjänster)
 requests==2.31.0
-aiohttp==3.8.6
+aiohttp==3.9.7
 httpx==0.25.0
 
 # JSON & datahantering
@@ -18,5 +18,8 @@ ujson==5.8.0
 apscheduler==3.10.4
 
 # Extra verktyg för stabil drift
-psutil==5.9.8   # process- och systeminfo
-rich==13.7.0    # snygga loggar och tabeller i terminalen
+psutil==5.9.8
+rich==13.7.0
+
+# Voice support
+PyNaCl==1.5.0
