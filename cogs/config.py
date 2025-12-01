@@ -16,7 +16,6 @@ class BotConfig:
             "Judging your slash commands ⚖️",
             "Watching memes evolve 📈",
             "Debugging reality itself 🧠",
-            "Waiting for !help like a champ 🏆",
             "Plotting world domination... with emojis 😈",
         ])
 
