@@ -44,3 +44,7 @@ if [ "$BOT_NAME" == "all" ]; then
 else
     restart_bot "$BOT_NAME"
 fi
+
+# Logga omstart
+TIMESTAMP=$(date '+%Y-%m-%d %H:%M:%S')
+echo "[$TIMESTAMP] Restarted $BOT_NAME (PID: $(cat $PIDFILE))" >> ./deploy.log
