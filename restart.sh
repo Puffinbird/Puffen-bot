@@ -1,14 +1,19 @@
 #!/bin/bash
 
+# ✅ Kontrollera att venv finns
 if [ ! -f "./venv/bin/activate" ]; then
-    echo "❌ venv saknas eller är trasig – kör 'python3 -m venv venv' först"
+    echo "❌ venv saknas – kör 'python3 -m venv venv' först"
     exit 1
 fi
 
+# ✅ Aktivera venv
 source ./venv/bin/activate
 
-
-source ./venv/bin/activate
+# ✅ Kontrollera att TOKEN är satt
+if [ -z "$TOKEN" ]; then
+    echo "❌ TOKEN saknas i miljön – kör 'export TOKEN=...'"
+    exit 1
+fi
 
 restart_bot() {
     BOT_NAME=$1
