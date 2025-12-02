@@ -9,12 +9,6 @@ fi
 # ✅ Aktivera venv
 source ./venv/bin/activate
 
-# ✅ Kontrollera att TOKEN är satt
-if [ -z "$TOKEN" ]; then
-    echo "❌ TOKEN saknas i miljön – kör 'export TOKEN=...'"
-    exit 1
-fi
-
 restart_bot() {
     BOT_NAME=$1
     BOT_DIR="./$BOT_NAME"
@@ -22,11 +16,29 @@ restart_bot() {
     LOG="$BOT_DIR/logs/bot.log"
     PIDFILE="$BOT_DIR/bot.pid"
 
+    # ✅ Välj rätt TOKEN beroende på bot
+    if [ "$BOT_NAME" == "Puffen" ]; then
+        TOKEN_VAR="PUFFEN_TOKEN"
+    elif [ "$BOT_NAME" == "Puffen-RPG" ]; then
+        TOKEN_VAR="RPG_TOKEN"
+    else
+        echo "❌ Okänd bot: $BOT_NAME"
+        return
+    fi
+
+    TOKEN_VALUE=$(printenv $TOKEN_VAR)
+    if [ -z "$TOKEN_VALUE" ]; then
+        echo "❌ Miljövariabel '$TOKEN_VAR' saknas – kör 'export $TOKEN_VAR=...'"
+        return
+    fi
+
+    # ✅ Kontrollera att main.py finns
     if [ ! -f "$MAIN" ]; then
         echo "❌ Hittar inte $MAIN – kontrollera botnamnet"
         return
     fi
 
+    # 🛑 Stoppa gammal process om den finns
     if [ -f "$PIDFILE" ]; then
         OLD_PID=$(cat "$PIDFILE")
         if ps -p $OLD_PID > /dev/null; then
@@ -44,6 +56,10 @@ restart_bot() {
     echo $! > "$PIDFILE"
 
     echo "✅ $BOT_NAME är nu omstartad (PID: $(cat $PIDFILE))"
+
+    # 📝 Logga omstart
+    TIMESTAMP=$(date '+%Y-%m-%d %H:%M:%S')
+    echo "[$TIMESTAMP] Restarted $BOT_NAME (PID: $(cat $PIDFILE))" >> ./deploy.log
 }
 
 BOT_NAME=$1
@@ -59,7 +75,3 @@ if [ "$BOT_NAME" == "all" ]; then
 else
     restart_bot "$BOT_NAME"
 fi
-
-# Logga omstart
-TIMESTAMP=$(date '+%Y-%m-%d %H:%M:%S')
-echo "[$TIMESTAMP] Restarted $BOT_NAME (PID: $(cat $PIDFILE))" >> ./deploy.log
