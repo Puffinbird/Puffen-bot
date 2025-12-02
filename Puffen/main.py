@@ -29,10 +29,11 @@ error_logger.addHandler(error_handler)
 error_logger.setLevel(logging.WARNING)
 
 # Token och intents
-TOKEN = os.getenv("PUFFEN_TOKEN")
+BOT_NAME = "Puffen"  # eller "Puffen-RPG"
+TOKEN = os.getenv(f"{BOT_NAME.upper().replace('-', '_')}_TOKEN")
 
 if not TOKEN:
-    logger.error("❌ TOKEN saknas i miljön!")
+    raise RuntimeError(f"❌ TOKEN för {BOT_NAME} saknas i miljön")
     exit(1)
 
 intents = discord.Intents.default()
