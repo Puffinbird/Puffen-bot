@@ -14,7 +14,7 @@ class HelpCog(commands.Cog):
 
         embed = discord.Embed(
             title="🎲 Puffen-RPG - Hjälp",
-            description="D&D 5e Discord Bot - Alla kommandon",
+            description="D&D - Alla kommandon",
             color=discord.Color.blue()
         )
 
