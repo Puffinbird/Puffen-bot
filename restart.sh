@@ -20,7 +20,7 @@ restart_bot() {
     if [ "$BOT_NAME" == "Puffen" ]; then
         TOKEN_VAR="PUFFEN_TOKEN"
     elif [ "$BOT_NAME" == "Puffen-RPG" ]; then
-        TOKEN_VAR="RPG_TOKEN"
+        TOKEN_VAR="PUFFEN_RPG_TOKEN"
     else
         echo "❌ Okänd bot: $BOT_NAME"
         return
