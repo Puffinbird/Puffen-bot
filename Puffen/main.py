@@ -29,7 +29,7 @@ error_logger.addHandler(error_handler)
 error_logger.setLevel(logging.WARNING)
 
 # Token och intents
-BOT_NAME = "Puffen"  # eller "Puffen-RPG"
+BOT_NAME = "Puffen"
 TOKEN = os.getenv(f"{BOT_NAME.upper().replace('-', '_')}_TOKEN")
 
 if not TOKEN:
