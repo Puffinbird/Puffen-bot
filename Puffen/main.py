@@ -29,7 +29,7 @@ error_logger.addHandler(error_handler)
 error_logger.setLevel(logging.WARNING)
 
 # Token och intents
-TOKEN = os.getenv("TOKEN")
+TOKEN = os.getenv("PUFFEN_TOKEN")
 
 if not TOKEN:
     logger.error("❌ TOKEN saknas i miljön!")
