@@ -1,5 +1,7 @@
 #!/bin/bash
 
+source ./venv/bin/activate
+
 BOT_NAME=$1
 
 if [ -z "$BOT_NAME" ]; then

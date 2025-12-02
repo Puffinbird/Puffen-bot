@@ -1,5 +1,15 @@
 #!/bin/bash
 
+if [ ! -f "./venv/bin/activate" ]; then
+    echo "❌ venv saknas eller är trasig – kör 'python3 -m venv venv' först"
+    exit 1
+fi
+
+source ./venv/bin/activate
+
+
+source ./venv/bin/activate
+
 restart_bot() {
     BOT_NAME=$1
     BOT_DIR="./$BOT_NAME"
