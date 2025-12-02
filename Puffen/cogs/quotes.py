@@ -3,7 +3,7 @@ import discord
 from discord.ext import commands
 from discord import app_commands
 from datetime import datetime
-from cogs.utils_core import dm, logger
+from utils_core import dm, logger
 
 class QuotePaginator(discord.ui.View):
     def __init__(self, quotes):

@@ -1,0 +1,14 @@
+# Discord-bot core
+discord.py==2.6.4
+python-dotenv==1.2.1
+
+# Logging & färgade terminalutskrifter
+colorama==0.4.6
+loguru==0.7.2
+
+# Extra verktyg för stabil drift
+psutil==5.9.8
+rich==13.7.0
+
+# Voice support
+PyNaCl==1.5.0

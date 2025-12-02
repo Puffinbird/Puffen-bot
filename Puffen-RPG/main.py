@@ -4,7 +4,7 @@ from logging.handlers import RotatingFileHandler
 from discord.ext import commands
 from discord import app_commands
 from dotenv import load_dotenv
-from cogs.config import config  # <-- laddar din config
+import config  # <-- laddar din config
 
 # Se till att log-mappen finns
 os.makedirs("logs", exist_ok=True)
@@ -50,8 +50,7 @@ async def setup_hook():
         "cogs.roles",
         "cogs.quotes",
         "cogs.admin",
-        "cogs.help",
-        "cogs.adventure"
+        "cogs.help"
     ]
 
     for ext in cogs_to_load:
