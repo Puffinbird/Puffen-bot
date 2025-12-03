@@ -1,6 +1,3 @@
-# ============================================
-# FILE: cogs/dice.py
-# ============================================
 import discord
 from discord.ext import commands
 from discord import app_commands
@@ -103,6 +100,32 @@ class DiceCog(commands.Cog):
 
         total = sum(stats)
         embed.set_footer(text=f"Totalt: {total} | Genomsnitt: {total/6:.1f}")
+
+        await interaction.response.send_message(embed=embed)
+
+    @app_commands.command(name="coinflip", description="Kasta ett mynt")
+    async def coinflip(self, interaction: discord.Interaction):
+        """Kastar ett mynt."""
+        result = random.choice(["Krona 👑", "Klave ⚔️"])
+
+        embed = discord.Embed(
+            title="🪙 Myntkast",
+            description=f"**{result}**",
+            color=discord.Color.gold()
+        )
+
+        await interaction.response.send_message(embed=embed)
+
+    @app_commands.command(name="coinflip", description="Kasta ett mynt")
+    async def coinflip(self, interaction: discord.Interaction):
+        """Kastar ett mynt."""
+        result = random.choice(["Krona 👑", "Klave ⚔️"])
+
+        embed = discord.Embed(
+            title="🪙 Myntkast",
+            description=f"**{result}**",
+            color=discord.Color.gold()
+        )
 
         await interaction.response.send_message(embed=embed)
 
